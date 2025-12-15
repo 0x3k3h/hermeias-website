@@ -663,6 +663,75 @@
 
         // 6. Klick Mail Page Component
         const KlickMailPage = ({ onNavigate }) => {
+          const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+          const [isUnlocked, setIsUnlocked] = useState(false);
+          const launchDate = new Date('2025-12-25T00:00:00').getTime();
+          // Obfuscated GitHub URL (will be revealed on unlock)
+          const githubUrl = ['https:', '//', 'github', '.com', '/hermeias-org', '/KlickMail'].join('');
+
+          useEffect(() => {
+            const updateTimer = () => {
+              const now = new Date().getTime();
+              const distance = launchDate - now;
+
+              if (distance < 0) {
+                setIsUnlocked(true);
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                return;
+              }
+
+              setTimeLeft({
+                days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                seconds: Math.floor((distance % (1000 * 60)) / 1000)
+              });
+            };
+
+            updateTimer();
+            const interval = setInterval(updateTimer, 1000);
+
+            return () => clearInterval(interval);
+          }, []);
+
+          // Prevent dev tools and right-click (basic protection)
+          useEffect(() => {
+            const preventDevTools = (e) => {
+              if (e.key === 'F12' || 
+                  (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                  (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                  (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                  (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                return false;
+              }
+            };
+
+            const preventRightClick = (e) => {
+              if (e.button === 2) {
+                e.preventDefault();
+                return false;
+              }
+            };
+
+            const preventSelect = (e) => {
+              if (e.target.closest('.locked-button')) {
+                e.preventDefault();
+                return false;
+              }
+            };
+
+            document.addEventListener('keydown', preventDevTools);
+            document.addEventListener('contextmenu', preventRightClick);
+            document.addEventListener('selectstart', preventSelect);
+
+            return () => {
+              document.removeEventListener('keydown', preventDevTools);
+              document.removeEventListener('contextmenu', preventRightClick);
+              document.removeEventListener('selectstart', preventSelect);
+            };
+          }, []);
+
           return (
             <div className="min-h-screen bg-transparent text-white font-sans selection:bg-white selection:text-black overflow-x-hidden relative">
               <CustomCursor />
@@ -826,14 +895,78 @@
                     <p className="text-white font-mono text-xl md:text-2xl font-bold mb-12">
                       LAUNCH DATE: 25TH DECEMBER 2025
                     </p>
-                    <a 
-                      href="https://tally.so/r/68LgaJ"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block border border-white px-12 py-6 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300 text-lg"
-                    >
-                      JOIN_WAITLIST()
-                    </a>
+                    {isUnlocked ? (
+                      <a 
+                        href={githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block border border-white px-12 py-6 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300 text-lg"
+                      >
+                        DOWNLOAD()
+                      </a>
+                    ) : (
+                      <div className="relative inline-block locked-button" style={{ userSelect: 'none' }}>
+                        <div 
+                          className="inline-block border border-white/30 px-12 py-6 font-cascadia font-bold text-lg pointer-events-none select-none opacity-50"
+                          style={{ 
+                            filter: 'blur(5px)',
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none',
+                            MozUserSelect: 'none',
+                            msUserSelect: 'none'
+                          }}
+                          onContextMenu={(e) => e.preventDefault()}
+                          onDragStart={(e) => e.preventDefault()}
+                        >
+                          DOWNLOAD()
+                        </div>
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center bg-black/20 rounded"
+                          style={{ 
+                            backdropFilter: 'blur(2px)',
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none'
+                          }}
+                        >
+                          <div className="text-center">
+                            <div className="font-mono text-xs text-gray-400 mb-2 tracking-widest">UNLOCKS IN</div>
+                            <div className="font-cascadia text-base font-bold text-white tabular-nums">
+                              {String(timeLeft.days).padStart(2, '0')}D {String(timeLeft.hours).padStart(2, '0')}H {String(timeLeft.minutes).padStart(2, '0')}M {String(timeLeft.seconds).padStart(2, '0')}S
+                            </div>
+                          </div>
+                        </div>
+                        <div 
+                          className="absolute inset-0 cursor-not-allowed"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            e.stopImmediatePropagation();
+                            return false;
+                          }}
+                          onContextMenu={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                          }}
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                          }}
+                          onAuxClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                          }}
+                          style={{ 
+                            pointerEvents: 'auto',
+                            zIndex: 10,
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none'
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </RevealOnScroll>
               </section>
@@ -1631,14 +1764,13 @@
                       cat: 'LEGAL TECH // EDUCATION', 
                       desc: 'A custom education solution for LLB STUDENTS. The best AI LLM specializing in Indian Law commissioned by Students for Students.',
                       shape: <Scale className="animate-pulse" />,
-                      url: 'https://demole.app'
+                      isInternal: true,
+                      page: 'demoleai'
                     }
                   ].map((project, idx) => (
                     <RevealOnScroll key={project.id} delay={idx * 100}>
-                      <a 
-                        href={project.url}
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <div 
+                        onClick={() => navigateTo(project.page)}
                         className="block group relative cursor-pointer"
                       >
                         <div className="absolute top-0 left-0 w-full h-[1px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out origin-left" />
@@ -1662,7 +1794,7 @@
                         </div>
 
                         <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-900" />
-                      </a>
+                      </div>
                     </RevealOnScroll>
                   ))}
                 </div>
