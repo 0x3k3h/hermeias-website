@@ -102,6 +102,13 @@
         const Mail = (props) => <Icon {...props} path={<><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></>} />;
         const Linkedin = (props) => <Icon {...props} path={<><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></>} />;
         const Instagram = (props) => <Icon {...props} path={<><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></>} />;
+        const Cloud = (props) => <Icon {...props} path={<><path d="M17.5 19a2.5 2.5 0 1 1 .1-4.99 4 4 0 1 1-7.5-3.01 2.5 2.5 0 1 1-3.1 3.01 4 4 0 1 1 7.5-3.01 2.5 2.5 0 1 1 3.1 3.01Z"/></>} />;
+        const Upload = (props) => <Icon {...props} path={<><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></>} />;
+        const Database = (props) => <Icon {...props} path={<><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3S3 13.66 3 12"/><path d="M21 5v7c0 1.66-4 3-9 3s-9-1.34-9-3V5"/><path d="M3 5v7c0 1.66 4 3 9 3s9-1.34 9-3V5"/></>} />;
+        const Settings = (props) => <Icon {...props} path={<><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></>} />;
+        const Lock = (props) => <Icon {...props} path={<><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>} />;
+        const Zap = (props) => <Icon {...props} path={<><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>} />;
+        const Folder = (props) => <Icon {...props} path={<><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></>} />;
 
 
         // --- Data: Portfolio of Services ---
@@ -1003,7 +1010,375 @@
           );
         };
 
-        // 7. DemoLe AI Page Component
+        // 7. Darium Page Component
+        const DariumPage = ({ onNavigate }) => {
+          const githubUrl = 'https://github.com/hermeias-org/darium';
+          const [showCommercialModal, setShowCommercialModal] = useState(false);
+          
+          return (
+            <div className="min-h-screen bg-transparent text-white font-sans selection:bg-white selection:text-black overflow-x-hidden relative">
+              <CustomCursor />
+              <ParticleBackground />
+
+              {/* Navigation */}
+              <nav className="fixed top-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference">
+                <button 
+                  onClick={() => onNavigate('home')}
+                  className="text-xl font-cascadia font-bold tracking-tighter hover:tracking-widest transition-all duration-300 cursor-pointer"
+                >
+                  HERMEiAS
+                </button>
+                
+                <div className="hidden md:flex space-x-12 font-mono text-xs tracking-widest">
+                  <button
+                    onClick={() => onNavigate('home')}
+                    className="relative group overflow-hidden"
+                  >
+                    <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
+                      HOME
+                    </span>
+                    <span className="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-gray-400">
+                      HOME
+                    </span>
+                  </button>
+                </div>
+              </nav>
+
+              {/* Darium Hero Section */}
+              <section className="relative min-h-screen flex flex-col justify-center items-center px-4 overflow-hidden z-10 pt-32">
+                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none select-none">
+                  <span className="text-[20vw] font-bold font-cascadia animate-pulse">D</span>
+                </div>
+
+                <div className="z-10 text-center space-y-6 max-w-4xl mx-auto">
+                  <RevealOnScroll>
+                    <div className="mb-8 flex justify-center">
+                      <img 
+                        src="./darium-logo.png" 
+                        alt="Darium Logo" 
+                        className="h-24 md:h-32 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  </RevealOnScroll>
+                  
+                  <RevealOnScroll delay={100}>
+                    <div className="text-xs font-mono tracking-[0.5em] mb-4 text-gray-400">
+                      DARIUM // V.1.0.0 // FREE // SELF-HOSTED
+                    </div>
+                  </RevealOnScroll>
+                  
+                  <RevealOnScroll delay={200}>
+                    <h1 className="font-cascadia text-6xl md:text-9xl font-black tracking-tighter leading-none mix-blend-difference">
+                      <GlitchText text="DARIUM" />
+                    </h1>
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={400}>
+                    <p className="max-w-2xl mx-auto text-base md:text-lg text-gray-400 font-mono leading-relaxed mt-8">
+                      A free, self-deployable and self-hosted CDN + Cloud panel. The dunes leave no prints.
+                    </p>
+                  </RevealOnScroll>
+                  <RevealOnScroll delay={500}>
+                    <div className="mt-8 inline-block border border-white/30 px-6 py-3 font-mono text-xs text-gray-500">
+                      CDN // CLOUD_STORAGE // SELF_HOSTED // TUNNEL_READY
+                    </div>
+                  </RevealOnScroll>
+                </div>
+              </section>
+
+              {/* Features Section */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10">
+                <RevealOnScroll>
+                  <h2 className="text-5xl md:text-7xl font-bold mb-20 text-center">
+                    THE <span className="outline-text">PLATFORM</span>
+                  </h2>
+                </RevealOnScroll>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                  {[
+                    {
+                      title: "BEAUTIFUL WEB GUI",
+                      desc: "Easy-to-use interface for non-technical users. Drag and drop file uploads, intuitive file management, and one-click URL copying.",
+                      icon: <Server className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "SELF-DEPLOYABLE",
+                      desc: "Deploy on your own infrastructure. Full control over your data and files. No vendor lock-in, no external dependencies.",
+                      icon: <Cloud className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "TUNNEL-READY",
+                      desc: "Works seamlessly with Pinggy.io and other tunneling services. Connect your custom domain/subdomain with ease.",
+                      icon: <Globe className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "INTELLIGENT CACHING",
+                      desc: "Automatic cache headers for optimal performance. Static assets cached for 1 year, downloads for 1 hour.",
+                      icon: <Zap className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "SECURE AUTHENTICATION",
+                      desc: "Password-protected admin interface with PIN recovery. Session-based authentication with secure password hashing.",
+                      icon: <Lock className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "FILE EXPLORER",
+                      desc: "Browse files in a directory structure with breadcrumbs. Preview images, play videos/audio directly in browser.",
+                      icon: <Folder className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "STATISTICS & LOGGING",
+                      desc: "Track visits, downloads, and access patterns. Monitor top countries, browsers, devices, and access logs.",
+                      icon: <Database className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "STORAGE LIMITS",
+                      desc: "Configure storage and bandwidth restrictions. Set limits per IP with 24-hour windows for bandwidth control.",
+                      icon: <Settings className="w-8 h-8 mb-4" />
+                    },
+                    {
+                      title: "COMPRESSION & CORS",
+                      desc: "Automatic Gzip compression for faster transfers. CORS enabled for cross-origin requests. Health check endpoint included.",
+                      icon: <Cpu className="w-8 h-8 mb-4" />
+                    }
+                  ].map((feature, idx) => (
+                    <RevealOnScroll key={idx} delay={idx * 100}>
+                      <div className="border border-white/20 p-8 hover:bg-white hover:text-black transition-all duration-500 group relative h-full flex flex-col">
+                        <div className="mb-4">{feature.icon}</div>
+                        <h3 className="font-cascadia font-bold text-xl mb-4">{feature.title}</h3>
+                        <p className="font-mono text-sm text-gray-400 group-hover:text-black/70 leading-relaxed flex-grow">
+                          {feature.desc}
+                        </p>
+                        <div className="mt-6 w-12 h-0.5 bg-white group-hover:bg-black transition-colors" />
+                      </div>
+                    </RevealOnScroll>
+                  ))}
+                </div>
+              </section>
+
+              {/* Login Page Preview Section */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10">
+                <RevealOnScroll>
+                  <h2 className="text-5xl md:text-7xl font-bold mb-20 text-center">
+                    SECURE <span className="outline-text">AUTHENTICATION</span>
+                  </h2>
+                </RevealOnScroll>
+
+                <div className="max-w-5xl mx-auto">
+                  <RevealOnScroll delay={200}>
+                    <div className="border border-white/20 p-4 md:p-8 bg-black/30 backdrop-blur-sm">
+                      <div className="relative group">
+                        <img 
+                          src="./login-page-darium.png" 
+                          alt="Darium Login Page" 
+                          className="w-full h-auto rounded-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm" />
+                      </div>
+                      <div className="mt-6 text-center">
+                        <p className="font-mono text-sm text-gray-400">
+                          Password-protected admin interface with PIN recovery. Secure session-based authentication.
+                        </p>
+                      </div>
+                    </div>
+                  </RevealOnScroll>
+                </div>
+              </section>
+
+              {/* Main UI Preview Section */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10 bg-black/30">
+                <RevealOnScroll>
+                  <h2 className="text-5xl md:text-7xl font-bold mb-20 text-center">
+                    WEB <span className="outline-text">INTERFACE</span>
+                  </h2>
+                </RevealOnScroll>
+
+                <div className="max-w-7xl mx-auto">
+                  <RevealOnScroll delay={200}>
+                    <div className="border border-white/20 p-4 md:p-8 bg-black/30 backdrop-blur-sm">
+                      <div className="relative group">
+                        <img 
+                          src="./DARIUM UI.png" 
+                          alt="Darium Main UI Dashboard" 
+                          className="w-full h-auto rounded-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm" />
+                      </div>
+                      <div className="mt-6 text-center">
+                        <p className="font-mono text-sm text-gray-400">
+                          Beautiful web GUI with drag & drop uploads, file management, statistics, and comprehensive settings.
+                        </p>
+                      </div>
+                    </div>
+                  </RevealOnScroll>
+                </div>
+              </section>
+
+              {/* Info Section */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10 bg-black/50 backdrop-blur-sm">
+                <div className="max-w-4xl mx-auto">
+                  <RevealOnScroll>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-12 font-cascadia text-center">
+                      FEATURES_OVERVIEW
+                    </h2>
+                  </RevealOnScroll>
+
+                  <div className="border border-white/20 bg-black/50 p-8 md:p-12 relative">
+                    <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                        <div className="w-3 h-3 rounded-full bg-blue-500" />
+                      </div>
+                      <div className="font-mono text-xs text-gray-500">
+                        DARIUM // STATUS
+                      </div>
+                    </div>
+
+                    <div className="font-mono text-sm md:text-base space-y-4">
+                      {[
+                        "Status: Available Now - Free for Personal Use",
+                        "License: Personal & Hobby Use (Free)",
+                        "Commercial: Available via Commercial License",
+                        "Deployment: Self-Hosted, Self-Deployable",
+                        "Requirements: Node.js 18.0.0+, npm",
+                        "Tunnel Support: Pinggy.io, Custom Domains",
+                        "Storage: Configurable Limits (Default: 10 GB)",
+                        "Authentication: Password + PIN Recovery",
+                        "File Types: Images, CSS, JS, Fonts, Archives, Documents",
+                        "Caching: Smart Cache Headers (1 year for assets, 1 hour for downloads)"
+                      ].map((spec, idx) => (
+                        <div 
+                          key={idx}
+                          className="flex items-start gap-4 p-2 hover:bg-white/5 transition-colors group"
+                        >
+                          <span className="text-gray-600 group-hover:text-blue-500 font-bold select-none">{String(idx + 1).padStart(2, '0')}</span>
+                          <span className="text-gray-300 group-hover:text-white transition-colors">
+                            {spec}
+                          </span>
+                        </div>
+                      ))}
+                      <div className="animate-pulse mt-8 text-blue-500">_</div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* CTA Section */}
+              <section className="py-32 px-6 md:px-24 relative z-10">
+                <RevealOnScroll>
+                  <div className="max-w-4xl mx-auto text-center space-y-8">
+                    <h2 className="text-4xl md:text-6xl font-bold font-cascadia mb-8">
+                      READY_TO_DEPLOY?
+                    </h2>
+                    <p className="text-gray-400 font-mono text-lg mb-12">
+                      Darium is free for personal and hobby use. Get started now or contact us for commercial licensing.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      <a 
+                        href={githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block border border-white px-12 py-6 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300 text-lg"
+                      >
+                        VIEW_ON_GITHUB()
+                      </a>
+                      <button 
+                        onClick={() => setShowCommercialModal(true)}
+                        className="inline-block border border-white/30 px-12 py-6 font-cascadia font-bold hover:border-white transition-all duration-300 text-lg text-gray-300 hover:text-white"
+                      >
+                        COMMERCIAL_LICENSE()
+                      </button>
+                    </div>
+                  </div>
+                </RevealOnScroll>
+              </section>
+
+              {/* Commercial License Modal */}
+              {showCommercialModal && (
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center px-4" onClick={() => setShowCommercialModal(false)}>
+                  <div className="bg-black border border-white/20 p-8 md:p-12 max-w-md w-full relative" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      onClick={() => setShowCommercialModal(false)}
+                      className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                    >
+                      <X className="w-6 h-6" />
+                    </button>
+                    
+                    <div className="space-y-6">
+                      <h3 className="text-2xl md:text-3xl font-cascadia font-bold mb-4">
+                        COMMERCIAL_LICENSE
+                      </h3>
+                      
+                      <p className="font-mono text-sm text-gray-300 leading-relaxed">
+                        For commercial use, enterprise features, or custom builds, please contact us at:
+                      </p>
+                      
+                      <div className="border border-white/20 p-4 bg-black/50">
+                        <p className="font-mono text-base text-white break-all">
+                          sales@hermeias.org
+                        </p>
+                      </div>
+                      
+                      <div className="flex gap-4">
+                        <a
+                          href="mailto:sales@hermeias.org"
+                          className="flex-1 inline-block border border-white px-6 py-3 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300 text-center text-sm"
+                        >
+                          OPEN_EMAIL()
+                        </a>
+                        <button
+                          onClick={() => setShowCommercialModal(false)}
+                          className="flex-1 border border-white/30 px-6 py-3 font-cascadia font-bold hover:border-white transition-all duration-300 text-sm text-gray-300 hover:text-white"
+                        >
+                          CLOSE()
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Footer */}
+              <section className="py-12 px-6 md:px-24 relative z-10 border-t border-gray-900">
+                <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
+                  <div className="text-gray-700 text-xs font-mono">
+                    © 2025 Demole IT & Research Private Limited. ALL RIGHTS RESERVED.
+                  </div>
+                  <div className="flex gap-6">
+                    <a 
+                      href="https://www.linkedin.com/company/hermeias-p2p"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-white transition-colors"
+                    >
+                      <Linkedin className="w-5 h-5" />
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/hermeias_org"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-white transition-colors"
+                    >
+                      <Instagram className="w-5 h-5" />
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </div>
+          );
+        };
+
+        // 8. DemoLe AI Page Component
         const DemoLeAIPage = ({ onNavigate }) => {
           return (
             <div className="min-h-screen bg-transparent text-white font-sans selection:bg-white selection:text-black overflow-x-hidden relative">
@@ -1382,6 +1757,7 @@
             if (path === 'demoleai' || path === 'demole') return 'demoleai';
             if (path === 'mystiko') return 'mystiko';
             if (path === 'klickmail' || path === 'klick-mail') return 'klickmail';
+            if (path === 'darium') return 'darium';
             if (path === 'careers') return 'careers';
             return 'home';
           };
@@ -1421,6 +1797,8 @@
               navigateTo('mystiko');
             } else if (normalizedId === 'klickmail') {
               navigateTo('klickmail');
+            } else if (normalizedId === 'darium') {
+              navigateTo('darium');
             } else if (normalizedId === 'careers') {
               navigateTo('careers');
             } else {
@@ -1460,6 +1838,11 @@
           // Render Klick Mail page
           if (currentPage === 'klickmail') {
             return <KlickMailPage onNavigate={navigateTo} />;
+          }
+
+          // Render Darium page
+          if (currentPage === 'darium') {
+            return <DariumPage onNavigate={navigateTo} />;
           }
 
           // Render Careers page
@@ -1513,7 +1896,7 @@
                 </button>
 
                 <div className="hidden md:flex space-x-12 font-mono text-xs tracking-widest">
-                  {['DEMOLE AI', 'MYSTIKO', 'KLICK MAIL', 'PHILOSOPHY', 'TEAM', 'SERVICES', 'WORKS', 'CONTRACT', 'CONTACT'].map((item) => (
+                  {['DEMOLE AI', 'MYSTIKO', 'KLICK MAIL', 'DARIUM', 'PHILOSOPHY', 'TEAM', 'SERVICES', 'WORKS', 'CONTRACT', 'CONTACT'].map((item) => (
                     <button
                       key={item}
                       onClick={() => scrollTo(item.toLowerCase())}
@@ -1532,7 +1915,7 @@
 
               {/* Mobile Menu Overlay */}
               <div className={`fixed inset-0 bg-black z-40 transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-8 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                 {['DEMOLE AI', 'MYSTIKO', 'KLICK MAIL', 'PHILOSOPHY', 'TEAM', 'SERVICES', 'WORKS', 'CONTRACT', 'CONTACT'].map((item) => (
+                 {['DEMOLE AI', 'MYSTIKO', 'KLICK MAIL', 'DARIUM', 'PHILOSOPHY', 'TEAM', 'SERVICES', 'WORKS', 'CONTRACT', 'CONTACT'].map((item) => (
                     <button
                       key={item}
                       onClick={() => scrollTo(item.toLowerCase())}
@@ -1777,6 +2160,15 @@
                       shape: <Scale className="animate-pulse" />,
                       isInternal: true,
                       page: 'demoleai'
+                    },
+                    { 
+                      id: '02', 
+                      title: 'Darium', 
+                      cat: 'CDN // CLOUD_STORAGE // SELF_HOSTED', 
+                      desc: 'A free, self-deployable and self-hosted CDN + Cloud panel. The dunes leave no prints.',
+                      shape: <Cloud className="animate-pulse" />,
+                      isInternal: true,
+                      page: 'darium'
                     }
                   ].map((project, idx) => (
                     <RevealOnScroll key={project.id} delay={idx * 100}>
