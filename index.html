@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HERMEiAS</title>
+    <meta name="description" content="HERMEiAS - Cutting-edge technology company developing innovative solutions including Koinos marketplace, DemoLe AI, Mystiko, and Klick Mail. Specializing in P2P systems, legal tech AI, and secure communication platforms.">
     
-    <!-- Tailwind CSS -->
+    <!-- Preconnect to external origins for faster loading -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts - Load early with display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS - Load synchronously for initial styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- React & ReactDOM - Defer loading to avoid blocking render -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js" defer></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" defer></script>
     
-    <!-- Babel (to compile JSX in browser) -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Babel (to compile JSX in browser) - Defer loading -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer></script>
     
     <style>
         /* Custom Fonts & Utilities */
@@ -2807,7 +2814,7 @@
 
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-12 font-mono text-xs md:text-sm">
                    <div className="space-y-3 md:space-y-4 w-full md:w-auto">
-                     <h4 className="font-bold border-b border-white inline-block pb-1 text-sm md:text-base">DIRECT LINE</h4>
+                     <h3 className="font-bold border-b border-white inline-block pb-1 text-sm md:text-base">DIRECT LINE</h3>
                      <a 
                        href="mailto:Contact@hermeias.org" 
                        className="block text-xl sm:text-2xl md:text-4xl text-gray-400 active:text-white md:hover:text-white transition-colors active:translate-x-1 md:hover:translate-x-2 transform duration-300 touch-manipulation break-all"
