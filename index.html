@@ -15,10 +15,10 @@
     <meta name="revisit-after" content="7 days">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://hermeias.com/">
-    
+    <link rel="canonical" href="https://www.hermeias.org/">
+
     <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="https://hermeias.com/sitemap.xml">
+    <link rel="sitemap" type="application/xml" href="https://www.hermeias.org/sitemap.xml">
     
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="./2by2 HERMEiAS logo.png">
@@ -41,10 +41,10 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hermeias.com/">
+    <meta property="og:url" content="https://www.hermeias.org/">
     <meta property="og:title" content="HERMEiAS | TorVault, Klick Mail, Darium, Koinos, DemoLe AI & Mystiko">
     <meta property="og:description" content="Cutting-edge technology solutions: TorVault onion service panel, Klick Mail email platform, Darium self-hosted system, Koinos marketplace, DemoLe AI, and Mystiko secure protocol. Innovative P2P systems and AI-powered tools.">
-    <meta property="og:image" content="https://hermeias.com/2by2%20HERMEiAS%20logo.png">
+    <meta property="og:image" content="https://www.hermeias.org/2by2%20HERMEiAS%20logo.png">
     <meta property="og:image:width" content="2000">
     <meta property="og:image:height" content="2000">
     <meta property="og:image:type" content="image/png">
@@ -53,10 +53,10 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://hermeias.com/">
+    <meta name="twitter:url" content="https://www.hermeias.org/">
     <meta name="twitter:title" content="HERMEiAS | TorVault, Klick Mail, Darium, Koinos, DemoLe AI & Mystiko">
     <meta name="twitter:description" content="Cutting-edge technology solutions: TorVault, Klick Mail, Darium, Koinos, DemoLe AI, and Mystiko. Innovative P2P systems and AI-powered tools.">
-    <meta name="twitter:image" content="https://hermeias.com/2by2%20HERMEiAS%20logo.png">
+    <meta name="twitter:image" content="https://www.hermeias.org/2by2%20HERMEiAS%20logo.png">
     <meta name="twitter:creator" content="@hermeias">
     <meta name="twitter:site" content="@hermeias">
     
@@ -67,8 +67,8 @@
       "@type": "Organization",
       "name": "HERMEiAS",
       "alternateName": "DemoLe IT & Research Private Limited",
-      "url": "https://hermeias.com",
-      "logo": "https://hermeias.com/2by2%20HERMEiAS%20logo.png",
+      "url": "https://www.hermeias.org",
+      "logo": "https://www.hermeias.org/2by2%20HERMEiAS%20logo.png",
       "description": "HERMEiAS develops innovative technology solutions including TorVault, Klick Mail, Darium, Koinos, DemoLe AI, and Mystiko.",
       "sameAs": [
         "https://github.com/hermeias-org",
@@ -93,7 +93,7 @@
           "description": "Self-hosted web panel for running Tor onion services. Host websites, chatrooms, file sharing and file receiving, each on its own .onion address, from a single server.",
           "applicationCategory": "SecurityApplication",
           "operatingSystem": "Linux, Docker",
-          "url": "https://hermeias.com/torvault",
+          "url": "https://www.hermeias.org/torvault",
           "codeRepository": "https://github.com/0x3k3h/TORVAULT",
           "license": "https://www.gnu.org/licenses/agpl-3.0.en.html",
           "offers": {
@@ -108,6 +108,7 @@
           "description": "Advanced email platform with mass sending capabilities, templates, and settings management. Launch date: December 25, 2025.",
           "applicationCategory": "EmailApplication",
           "operatingSystem": "Web",
+          "url": "https://www.hermeias.org/klickmail",
           "offers": {
             "@type": "Offer",
             "availability": "https://schema.org/InStock"
@@ -119,6 +120,7 @@
           "description": "Free, self-hosted solution for secure and private hosting. Version 1.0.0 available.",
           "applicationCategory": "HostingApplication",
           "operatingSystem": "Web",
+          "url": "https://www.hermeias.org/darium",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -131,6 +133,7 @@
           "description": "Open-source marketplace platform enabling barrier-free trading. Inspired by Greek island trading traditions.",
           "applicationCategory": "MarketplaceApplication",
           "operatingSystem": "Web",
+          "url": "https://www.hermeias.org/koinos",
           "codeRepository": "https://github.com/hermeias-org/Koinos"
         },
         {
@@ -150,7 +153,8 @@
           "name": "Mystiko",
           "description": "Secure protocol and TUI (Terminal User Interface) for encrypted communications. Version 1.0.0.",
           "applicationCategory": "SecurityApplication",
-          "operatingSystem": "Web"
+          "operatingSystem": "Web",
+          "url": "https://www.hermeias.org/mystiko"
         }
       ]
     }
@@ -3051,6 +3055,78 @@
             const page = getPageFromPath();
             setCurrentPage(page);
           }, []);
+
+          // Per-route SEO metadata (title, description, canonical, OG/Twitter)
+          const SEO_ROUTES = {
+            home: {
+              title: 'HERMEiAS | TorVault, Klick Mail, Darium, Koinos, DemoLe AI & Mystiko - Innovative Tech Solutions',
+              description: 'HERMEiAS develops cutting-edge technology solutions: TorVault Tor onion service panel, Klick Mail email platform, Darium self-hosted system, Koinos open marketplace, DemoLe AI legal tech, and Mystiko secure protocol. Explore innovative P2P systems, AI-powered tools, and secure communication platforms.',
+              path: '/'
+            },
+            torvault: {
+              title: 'TorVault | Self-Hosted Panel for Tor Hidden Services - HERMEiAS',
+              description: 'TorVault is a self-hosted web panel for running Tor onion services. Host websites, chatrooms, and file sharing, each on its own .onion address, from a single server you control — no third-party host.',
+              path: '/torvault'
+            },
+            klickmail: {
+              title: 'Klick Mail | Email Automation & Mass Sending Platform - HERMEiAS',
+              description: 'Klick Mail is an advanced email platform with mass sending capabilities, templates, and settings management.',
+              path: '/klickmail'
+            },
+            darium: {
+              title: 'Darium | Free Self-Hosted CDN & Cloud Storage Panel - HERMEiAS',
+              description: 'Darium is a free, self-deployable and self-hosted CDN + Cloud panel for secure, private hosting.',
+              path: '/darium'
+            },
+            koinos: {
+              title: 'Koinos | Open-Source Peer-to-Peer Marketplace - HERMEiAS',
+              description: 'Koinos is an open-source, full-stack peer-to-peer marketplace platform enabling barrier-free trading, inspired by Greek island trading traditions.',
+              path: '/koinos'
+            },
+            demoleai: {
+              title: 'DemoLe AI | AI-Powered Legal Tech for Indian Law - HERMEiAS',
+              description: 'DemoLe AI is an AI-powered legal technology and education solution specializing in Indian Law for LLB students.',
+              path: '/demoleai'
+            },
+            mystiko: {
+              title: 'Mystiko | Secure Protocol & TUI for Encrypted Communications - HERMEiAS',
+              description: 'Mystiko is a secure protocol and terminal user interface (TUI) for encrypted communications.',
+              path: '/mystiko'
+            },
+            careers: {
+              title: 'Careers | Join HERMEiAS',
+              description: 'Explore careers and open opportunities at HERMEiAS, building open-source and privacy-focused technology.',
+              path: '/careers'
+            },
+            donate: {
+              title: 'Support HERMEiAS | Donate to Open-Source Development',
+              description: 'Support HERMEiAS open-source projects like TorVault, Darium, and Koinos with a donation.',
+              path: '/donate'
+            }
+          };
+
+          // Update document title, meta description, canonical URL, and OG/Twitter tags per route
+          useEffect(() => {
+            const route = SEO_ROUTES[currentPage] || SEO_ROUTES.home;
+            const fullUrl = `https://www.hermeias.org${route.path}`;
+
+            document.title = route.title;
+
+            const setMeta = (selector, attr, value) => {
+              const el = document.querySelector(selector);
+              if (el) el.setAttribute(attr, value);
+            };
+
+            setMeta('meta[name="title"]', 'content', route.title);
+            setMeta('meta[name="description"]', 'content', route.description);
+            setMeta('link[rel="canonical"]', 'href', fullUrl);
+            setMeta('meta[property="og:url"]', 'content', fullUrl);
+            setMeta('meta[property="og:title"]', 'content', route.title);
+            setMeta('meta[property="og:description"]', 'content', route.description);
+            setMeta('meta[name="twitter:url"]', 'content', fullUrl);
+            setMeta('meta[name="twitter:title"]', 'content', route.title);
+            setMeta('meta[name="twitter:description"]', 'content', route.description);
+          }, [currentPage]);
 
           // Handle browser back/forward buttons
           useEffect(() => {
