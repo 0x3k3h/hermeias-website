@@ -529,6 +529,34 @@
               "Crypto Payment Integration to Website",
               "Crypto Payment Integration to Marketplace"
             ]
+          },
+          {
+            id: 'onion',
+            title: 'ONION_HOSTING_CONSULTING',
+            icon: <Onion className="w-6 h-6" />,
+            description: 'White-glove consulting for running production .onion services. We self-host every Tor site we deploy — no third-party hosts, no shared metadata.',
+            items: [
+              "Self-Hosted .onion Site Deployment",
+              "Dedicated Tor Relay & Bridge Provisioning",
+              "Vanity .onion Address Generation (v3)",
+              "Onion Service Load Balancing (OnionBalance)",
+              "Hardened Hidden Service Architecture Review",
+              "Tor + Reverse Proxy (Nginx/Caddy) Configuration",
+              "Client Authorization & Restricted Onion Access",
+              "DDoS Mitigation for Onion Services (PoW, rate limiting)",
+              "Metadata & Operational Security (OPSEC) Consulting",
+              "Anonymous Hosting Infrastructure Design",
+              "Air-Gapped Key Management for Onion Services",
+              "Tor Bridge Distribution for Censored Regions",
+              "Onion Site Uptime Monitoring & Circuit Health",
+              "Encrypted Backup & Disaster Recovery for Hidden Services",
+              "Clearnet-to-Onion Mirror Setup (Onion-Location)",
+              "SecureDrop / Whistleblower Platform Deployment",
+              "Onion Service Migration & Key Rotation",
+              "Threat Modeling & Deanonymization Risk Assessment",
+              "Staff Training on Tor Operations & Incident Response",
+              "Ongoing Managed Hosting & Retainer Support"
+            ]
           }
         ];
 
@@ -559,10 +587,7 @@
               // Check if hovering over interactive element
               const target = e.target;
               setLinkHovered(
-                target.tagName.toLowerCase() === 'a' ||
-                target.tagName.toLowerCase() === 'button' ||
-                target.closest('button') ||
-                target.closest('a')
+                !!(target.closest && (target.closest('a') || target.closest('button')))
               );
             };
 
@@ -698,20 +723,56 @@
           const ref = useRef(null);
 
           useEffect(() => {
-            const observer = new IntersectionObserver(
-              ([entry]) => {
-                if (entry.isIntersecting) {
-                  setIsVisible(true);
-                  observer.unobserve(entry.target);
-                }
-              },
-              { threshold: 0.1 }
-            );
+            const node = ref.current;
+            if (!node) return;
 
-            if (ref.current) observer.observe(ref.current);
+            let done = false;
+            let raf = 0;
+            const start = performance.now();
+
+            const reveal = () => {
+              if (done) return;
+              done = true;
+              setIsVisible(true);
+              observer.disconnect();
+              cancelAnimationFrame(raf);
+              window.removeEventListener('scroll', check, { passive: true });
+              window.removeEventListener('resize', check);
+            };
+
+            const inView = () => {
+              const rect = node.getBoundingClientRect();
+              return rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
+            };
+            const check = () => { if (inView()) reveal(); };
+
+            const observer = new IntersectionObserver(
+              ([entry]) => { if (entry.isIntersecting) reveal(); },
+              { threshold: 0, rootMargin: '0px 0px -5% 0px' }
+            );
+            observer.observe(node);
+            window.addEventListener('scroll', check, { passive: true });
+            window.addEventListener('resize', check);
+
+            // rAF fallback: IntersectionObserver can miss elements during fast,
+            // programmatic, or history-restored scrolls. Poll cheaply until the
+            // element has been shown, then stop (hard cap so it never leaks).
+            const tick = (now) => {
+              if (done) return;
+              check();
+              // Keep polling only while near the viewport and only briefly after
+              // mount; the observer + scroll listener cover everything else.
+              const far = node.getBoundingClientRect().top > window.innerHeight * 2;
+              if (!done && !far && now - start < 8000) raf = requestAnimationFrame(tick);
+            };
+            raf = requestAnimationFrame(tick);
 
             return () => {
-              if (ref.current) observer.unobserve(ref.current);
+              done = true;
+              observer.disconnect();
+              cancelAnimationFrame(raf);
+              window.removeEventListener('scroll', check, { passive: true });
+              window.removeEventListener('resize', check);
             };
           }, []);
 
@@ -2388,12 +2449,13 @@
                   <RevealOnScroll delay={200}>
                     <div className="border border-white/20 p-4 md:p-8 bg-black/30 backdrop-blur-sm">
                       <div className="relative group">
-                        <img 
-                          src="./DARIUM UI.png" 
-                          alt="Darium Web Interface Dashboard - File Management, Statistics, and Settings Panel" 
+                        <img
+                          src="./DARIUM UI.png"
+                          alt="Darium Web Interface Dashboard - File Management, Statistics, and Settings Panel"
                           className="w-full h-auto rounded-sm shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
                           onError={(e) => {
-                            e.target.style.display = 'none';
+                            const card = e.target.closest('section');
+                            if (card) card.style.display = 'none';
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-sm" />
@@ -3927,6 +3989,218 @@
           );
         };
 
+        // Onion Hosting Consulting — flagship service page
+        const OnionHostingPage = ({ onNavigate }) => {
+          const quoteHref = 'mailto:Suryanshnandwani1@gmail.com?subject=.onion%20hosting%20project%20%E2%80%94%20request%20for%20quote&body=Project%20type%3A%0AExpected%20traffic%2Fscale%3A%0ATimeline%3A%0AAnything%20else%20we%20should%20know%3A%0A';
+          const capabilities = (servicesData.find(s => s.id === 'onion') || { items: [] }).items;
+
+          const process = [
+            { step: '01', title: 'SCOPE', desc: 'You tell us what the service is — a site, a drop box, a whole platform — and your threat model. We come back with a fixed quote and a build plan.' },
+            { step: '02', title: 'BUILD', desc: 'We build the application and stand up the infrastructure: hardened host, Tor daemon, reverse proxy, v3 client auth, PoW DDoS defence where it fits.' },
+            { step: '03', title: 'HOST', desc: 'We run it on our own metal. No third-party host ever holds your keys or sees your traffic. You get the .onion address and a status channel.' },
+            { step: '04', title: 'MAINTAIN', desc: 'Circuit-health monitoring, encrypted backups, key rotation, and incident response on a monthly retainer. Or we hand you the runbook and walk away.' }
+          ];
+
+          return (
+            <div className="min-h-screen bg-transparent text-white font-sans selection:bg-white selection:text-black overflow-x-hidden relative">
+              <CustomCursor />
+              <ParticleBackground />
+
+              {/* Navigation */}
+              <nav className="fixed top-0 w-full z-40 px-6 py-6 flex justify-between items-center mix-blend-difference">
+                <button
+                  onClick={() => onNavigate('home')}
+                  className="text-xl font-cascadia font-bold tracking-tighter hover:tracking-widest transition-all duration-300 cursor-pointer"
+                >
+                  HERMEiAS
+                </button>
+                <div className="hidden md:flex space-x-12 font-mono text-xs tracking-widest">
+                  <button onClick={() => onNavigate('torvault')} className="relative group overflow-hidden">
+                    <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">TORVAULT</span>
+                    <span className="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-gray-400">TORVAULT</span>
+                  </button>
+                  <button onClick={() => onNavigate('home')} className="relative group overflow-hidden">
+                    <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">HOME</span>
+                    <span className="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-gray-400">HOME</span>
+                  </button>
+                </div>
+              </nav>
+
+              {/* Hero */}
+              <section className="relative min-h-screen flex flex-col justify-center items-center px-4 overflow-hidden z-10 pt-32">
+                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none select-none">
+                  <Onion className="w-[40vw] h-[40vw] animate-pulse" />
+                </div>
+
+                <div className="z-10 text-center space-y-6 max-w-4xl mx-auto">
+                  <RevealOnScroll>
+                    <div className="text-xs font-mono tracking-[0.5em] mb-4 text-gray-400">
+                      CONSULTING // TOR_NETWORK // SELF_HOSTED
+                    </div>
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={200}>
+                    <h1 className="font-cascadia text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-none mix-blend-difference">
+                      <GlitchText text=".ONION HOSTING" />
+                    </h1>
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={400}>
+                    <p className="max-w-2xl mx-auto text-base md:text-lg text-gray-400 font-mono leading-relaxed mt-8">
+                      We build your Tor project and run it on our own infrastructure. Every <span className="text-white">.onion</span> service we deploy is self-hosted by us — no third-party hosts, no shared metadata, no keys leaving our hands.
+                    </p>
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={500}>
+                    <div className="mt-8 inline-block border border-white/30 px-6 py-3 font-mono text-xs text-gray-500">
+                      BUILD + HOST // FROM $1000 // SCALES WITH PROJECT
+                    </div>
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={600}>
+                    <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      <a href={quoteHref} className="inline-block border border-white px-8 py-3 font-mono text-sm hover:bg-white hover:text-black transition-all duration-300">
+                        REQUEST A QUOTE
+                      </a>
+                      <button onClick={() => onNavigate('torvault')} className="inline-block border border-purple-500/50 px-8 py-3 font-mono text-sm text-purple-400 hover:bg-purple-500/10 hover:border-purple-400 transition-all duration-300">
+                        SEE TORVAULT (DIY)
+                      </button>
+                    </div>
+                  </RevealOnScroll>
+                </div>
+              </section>
+
+              {/* Pricing */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10 bg-black/50 backdrop-blur-sm">
+                <RevealOnScroll>
+                  <h2 className="text-4xl md:text-6xl font-bold mb-6 font-cascadia text-center">
+                    THE <span className="outline-text">DEAL</span>
+                  </h2>
+                </RevealOnScroll>
+                <RevealOnScroll delay={100}>
+                  <p className="text-center font-mono text-sm text-gray-500 max-w-2xl mx-auto mb-16">
+                    One engagement covers the whole thing: we design it, build it, and host it.
+                  </p>
+                </RevealOnScroll>
+
+                <div className="max-w-3xl mx-auto border border-white/20 bg-black/60 p-8 md:p-14 relative">
+                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-8 mb-8">
+                    <div>
+                      <div className="font-mono text-xs text-gray-500 mb-2">STARTING AT</div>
+                      <div className="font-cascadia text-6xl md:text-7xl font-black">$1000</div>
+                    </div>
+                    <p className="font-mono text-sm text-gray-400 md:text-right md:max-w-xs leading-relaxed">
+                      Final price scales with the build. A single static onion site sits near the floor; a full platform with auth, moderation and anti-abuse costs more.
+                    </p>
+                  </div>
+
+                  <div className="font-mono text-sm space-y-4">
+                    {[
+                      'Custom build of any Tor project — site, chat, file drop, marketplace, whistleblower platform',
+                      'Deployed on HERMEiAS-owned infrastructure — we self-host every site',
+                      'Hardened hidden-service architecture: reverse proxy, v3 client auth, OPSEC review',
+                      'DDoS mitigation (proof-of-work, rate limiting) tuned to your service',
+                      'Encrypted backups, key management, and a private status channel',
+                      'Optional monthly retainer for monitoring, updates and incident response'
+                    ].map((line, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <span className="text-green-400 select-none">+</span>
+                        <span className="text-gray-300">{line}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-10">
+                    <a href={quoteHref} className="inline-block border border-white px-10 py-4 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300">
+                      REQUEST A QUOTE
+                    </a>
+                  </div>
+                </div>
+              </section>
+
+              {/* Capabilities */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10">
+                <RevealOnScroll>
+                  <h2 className="text-4xl md:text-6xl font-bold mb-16 font-cascadia text-center">
+                    WHAT WE <span className="outline-text">HANDLE</span>
+                  </h2>
+                </RevealOnScroll>
+                <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3 font-mono text-sm">
+                  {capabilities.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3 py-2 border-b border-white/5 group">
+                      <span className="text-gray-600 group-hover:text-blue-500 text-xs pt-0.5 select-none">{String(idx + 1).padStart(2, '0')}</span>
+                      <span className="text-gray-300 group-hover:text-white transition-colors">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Process */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10 bg-black/50 backdrop-blur-sm">
+                <RevealOnScroll>
+                  <h2 className="text-4xl md:text-6xl font-bold mb-16 font-cascadia text-center">
+                    HOW IT <span className="outline-text">RUNS</span>
+                  </h2>
+                </RevealOnScroll>
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {process.map((p, idx) => (
+                    <RevealOnScroll key={idx} delay={idx * 100}>
+                      <div className="border border-white/20 p-8 hover:bg-white hover:text-black transition-all duration-500 group h-full flex flex-col">
+                        <div className="font-cascadia text-3xl font-black mb-4 text-gray-600 group-hover:text-black">{p.step}</div>
+                        <h3 className="font-cascadia font-bold text-xl mb-4">{p.title}</h3>
+                        <p className="font-mono text-sm text-gray-400 group-hover:text-black/70 leading-relaxed flex-grow">{p.desc}</p>
+                        <div className="mt-6 w-12 h-0.5 bg-white group-hover:bg-black transition-colors" />
+                      </div>
+                    </RevealOnScroll>
+                  ))}
+                </div>
+              </section>
+
+              {/* Notes */}
+              <section className="py-32 px-6 md:px-24 relative border-b border-gray-900 z-10">
+                <div className="max-w-4xl mx-auto border border-yellow-500/30 bg-yellow-500/5 p-8 md:p-10">
+                  <div className="flex items-center gap-3 mb-6">
+                    <AlertTriangle className="w-6 h-6 text-yellow-500" />
+                    <h3 className="text-xl font-cascadia font-bold text-yellow-500">BEFORE YOU ASK</h3>
+                  </div>
+                  <ul className="font-mono text-sm text-gray-400 space-y-3 leading-relaxed">
+                    <li>— We build and host lawful services. We will not take on anything intended for fraud, abuse, or harm.</li>
+                    <li>— "Self-hosted" means HERMEiAS-operated hardware. If you need to hold the keys yourself, start from <button onClick={() => onNavigate('torvault')} className="text-white underline hover:text-purple-400">TorVault</button> instead.</li>
+                    <li>— Pricing is per project. Tell us the scale and we return a fixed number, not an hourly estimate.</li>
+                    <li>— Retainer hosting is billed monthly and can be cancelled; we hand over a migration runbook on exit.</li>
+                  </ul>
+                </div>
+              </section>
+
+              {/* CTA */}
+              <section className="py-32 px-6 md:px-24 relative z-10 text-center">
+                <RevealOnScroll>
+                  <h2 className="text-4xl md:text-6xl font-bold mb-8 font-cascadia">
+                    HAVE A TOR <span className="outline-text">PROJECT?</span>
+                  </h2>
+                  <p className="font-mono text-sm text-gray-500 max-w-xl mx-auto mb-10">
+                    Send us the shape of it — type, scale, timeline — and we'll come back with a fixed quote.
+                  </p>
+                  <a href={quoteHref} className="inline-block border border-white px-12 py-6 font-cascadia font-bold hover:bg-white hover:text-black transition-all duration-300 text-lg">
+                    REQUEST A QUOTE
+                  </a>
+                </RevealOnScroll>
+              </section>
+
+              <RelatedProducts currentPage="torvault" onNavigate={onNavigate} />
+
+              {/* Footer */}
+              <section className="py-12 px-6 md:px-24 relative z-10 border-t border-gray-900">
+                <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
+                  <div className="text-gray-700 text-xs font-mono">
+                    © 2025 Demole IT & Research Private Limited. ALL RIGHTS RESERVED.
+                  </div>
+                </div>
+              </section>
+            </div>
+          );
+        };
+
         const App = () => {
           const [loading, setLoading] = useState(true);
           const [menuOpen, setMenuOpen] = useState(false);
@@ -3947,6 +4221,7 @@
             if (path === 'parrhesiaengine' || path === 'parrhesia-engine' || path === 'parrhesia') return 'parrhesiaengine';
             if (path === 'haustorium') return 'haustorium';
             if (path === 'torvault' || path === 'tor-vault') return 'torvault';
+            if (path === 'onion-hosting' || path === 'onionhosting' || path === 'onion' || path === 'tor-hosting') return 'onionhosting';
             if (path === 'donate' || path === 'donation' || path === 'support') return 'donate';
             if (path === 'careers') return 'careers';
             return 'home';
@@ -3971,6 +4246,11 @@
               title: 'TorVault | Self-Hosted Panel for Tor Hidden Services - HERMEiAS',
               description: 'TorVault is a self-hosted web panel for running Tor onion services. Host websites, chatrooms, and file sharing, each on its own .onion address, from a single server you control — no third-party host.',
               path: '/torvault'
+            },
+            onionhosting: {
+              title: 'Onion Hosting Consulting | We Build & Self-Host Your Tor Project - HERMEiAS',
+              description: 'HERMEiAS builds custom Tor projects and self-hosts them on our own infrastructure — sites, chat, file drops, whistleblower platforms. Hardened .onion services, no third-party hosts. Build + host from $1000, priced per project.',
+              path: '/onion-hosting'
             },
             klickmail: {
               title: 'Klick Mail | Email Automation & Mass Sending Platform - HERMEiAS',
@@ -4069,9 +4349,23 @@
               '@type': 'BreadcrumbList',
               itemListElement: [
                 { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.hermeias.org/' },
-                ...(product ? [{ '@type': 'ListItem', position: 2, name: product.title, item: fullUrl }] : [])
+                ...(product ? [{ '@type': 'ListItem', position: 2, name: product.title, item: fullUrl }] : []),
+                ...(currentPage === 'onionhosting' ? [{ '@type': 'ListItem', position: 2, name: 'Onion Hosting Consulting', item: fullUrl }] : [])
               ]
             }];
+
+            if (currentPage === 'onionhosting') {
+              graph.push({
+                '@type': 'Service',
+                name: 'Onion Hosting Consulting',
+                serviceType: 'Tor onion service development and managed hosting',
+                description: route.description,
+                url: fullUrl,
+                areaServed: 'Worldwide',
+                provider: { '@type': 'Organization', name: 'HERMEiAS', url: 'https://www.hermeias.org' },
+                offers: { '@type': 'Offer', price: '1000', priceCurrency: 'USD', description: 'Build and self-host a custom Tor project; final price scales with project scope.' }
+              });
+            }
 
             if (product && extra) {
               graph.push({
@@ -4142,6 +4436,8 @@
               navigateTo('koinos');
             } else if (normalizedId === 'torvault') {
               navigateTo('torvault');
+            } else if (normalizedId === 'onionhosting') {
+              navigateTo('onionhosting');
             } else if (normalizedId === 'donate') {
               navigateTo('donate');
             } else if (normalizedId === 'careers') {
@@ -4152,7 +4448,7 @@
                 navigateTo('home');
                 setTimeout(() => {
                   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                }, 350);
               } else {
                 document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
               }
@@ -4208,6 +4504,10 @@
           // Render TorVault page
           if (currentPage === 'torvault') {
             return <TorVaultPage onNavigate={navigateTo} />;
+          }
+
+          if (currentPage === 'onionhosting') {
+            return <OnionHostingPage onNavigate={navigateTo} />;
           }
 
           // Render Donate page
@@ -4293,6 +4593,12 @@
                     </button>
                   ))}
                   <button
+                    onClick={() => navigateTo('onionhosting')}
+                    className="border border-purple-400/60 text-purple-300 px-3 py-2 hover:bg-purple-400 hover:text-black transition-all duration-300"
+                  >
+                    .ONION HOSTING
+                  </button>
+                  <button
                     onClick={() => navigateTo('donate')}
                     className="border border-white/40 px-3 py-2 hover:bg-white hover:text-black transition-all duration-300"
                   >
@@ -4316,8 +4622,8 @@
                   </button>
                 </div>
                 
-                <div className="h-full flex items-center justify-start md:justify-center px-4 md:px-6 lg:px-24 overflow-x-auto no-scrollbar py-16 md:py-20">
-                  <div className="flex flex-row gap-4 md:gap-6 lg:gap-12 items-center min-w-max">
+                <div className="h-full flex items-start md:items-center lg:items-start justify-start md:justify-center px-4 md:px-6 lg:px-16 overflow-x-auto lg:overflow-x-hidden overflow-y-auto no-scrollbar pt-24 pb-16 md:py-20">
+                  <div className="flex flex-row lg:flex-wrap gap-4 md:gap-6 lg:gap-8 items-stretch justify-start lg:justify-center min-w-max lg:min-w-0 lg:max-w-6xl mx-auto">
                     {products.map((product, idx) => (
                       <a
                         key={product.id}
@@ -4401,6 +4707,15 @@
                  <button
                    onClick={() => {
                      setMenuOpen(false);
+                     navigateTo('onionhosting');
+                   }}
+                   className="font-cascadia text-3xl sm:text-4xl font-bold border border-purple-400/60 text-purple-300 px-6 py-3 mt-2 active:bg-purple-400 active:text-black md:hover:bg-purple-400 md:hover:text-black transition-colors touch-manipulation"
+                 >
+                   .ONION HOSTING
+                 </button>
+                 <button
+                   onClick={() => {
+                     setMenuOpen(false);
                      navigateTo('donate');
                    }}
                    className="font-cascadia text-3xl sm:text-4xl font-bold border border-white/40 px-6 py-3 mt-2 active:bg-white active:text-black md:hover:bg-white md:hover:text-black transition-colors touch-manipulation"
@@ -4449,6 +4764,42 @@
                    ))}
                 </div>
               </div>
+
+              {/* Featured Service — .onion Hosting */}
+              <section className="py-16 md:py-28 px-4 sm:px-6 md:px-24 relative border-b border-gray-900 z-10 bg-black/60 backdrop-blur-sm">
+                <RevealOnScroll>
+                  <div className="max-w-6xl mx-auto border border-purple-400/30 bg-gradient-to-br from-purple-500/5 to-transparent p-8 md:p-14 relative overflow-hidden">
+                    <div className="absolute -right-10 -top-10 opacity-10 pointer-events-none select-none">
+                      <Onion className="w-48 h-48 md:w-64 md:h-64" />
+                    </div>
+                    <div className="relative z-10 max-w-3xl">
+                      <div className="font-mono text-[10px] md:text-xs tracking-[0.3em] text-purple-300 mb-4">
+                        FLAGSHIP SERVICE // TOR_NETWORK
+                      </div>
+                      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold font-cascadia mb-6 leading-tight">
+                        WE BUILD &amp; SELF-HOST YOUR <span className="outline-text">.ONION</span>
+                      </h2>
+                      <p className="font-mono text-sm md:text-base text-gray-400 leading-relaxed mb-8">
+                        Any Tor project — a site, a chatroom, a file drop, a whole platform. We build it and run it on our own infrastructure. No third-party hosts, no shared metadata, keys never leave our hands. <span className="text-white">Build + host from $1000</span>, priced per project.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button
+                          onClick={() => navigateTo('onionhosting')}
+                          className="inline-block border border-purple-400 text-purple-200 px-8 py-4 font-cascadia font-bold hover:bg-purple-400 hover:text-black transition-all duration-300"
+                        >
+                          EXPLORE .ONION HOSTING
+                        </button>
+                        <button
+                          onClick={() => navigateTo('torvault')}
+                          className="inline-block border border-white/30 px-8 py-4 font-mono text-sm hover:bg-white hover:text-black transition-all duration-300"
+                        >
+                          OR SELF-HOST WITH TORVAULT
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </RevealOnScroll>
+              </section>
 
               {/* Philosophy Section */}
               <section id="philosophy" className="min-h-screen py-16 md:py-32 px-4 sm:px-6 md:px-24 relative border-b border-gray-900 z-10">
