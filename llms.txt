@@ -1,0 +1,33 @@
+# HERMEiAS
+
+> HERMEiAS is a software & technology consulting firm building custom software, AI systems, web platforms, storage infrastructure, payment integrations, and secure/private communications systems for clients worldwide across hospitality, real estate, security, and legal sectors. HERMEiAS is also the creator of a portfolio of open-source and commercial products spanning Tor/onion hosting, email automation, self-hosted storage, peer-to-peer marketplaces, legal AI, encrypted communications, prompt engineering, and homelab tunneling.
+
+Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani, CEO). Open for software & technology consulting contracts worldwide.
+
+## Company
+
+- [Home](https://www.hermeias.org/): Overview of HERMEiAS as a consulting firm — services, team, selected clients, and FAQ.
+- [Roadmap](https://www.hermeias.org/roadmap): The public product & infrastructure roadmap — hosting panel, licensing/anti-piracy, webapp optimization, uncensored AI infrastructure, privacy enterprise, and the ecosystem subscription tying it together.
+- [Careers](https://www.hermeias.org/careers): Open positions, and the open commission-based contract for entrepreneurs and B2B salespeople.
+- [Donate](https://www.hermeias.org/donate): Support HERMEiAS's open-source projects (TorVault, Darium, Koinos, ParrhesiaEngine, Haustorium).
+
+## Onion / Tor Infrastructure
+
+- [.onion Hosting Consulting](https://www.hermeias.org/onion-hosting): HERMEiAS builds and self-hosts custom Tor projects (sites, chat, file drops, whistleblower platforms) on its own infrastructure — no third-party hosts. Priced per project, starting at $1000.
+- [TorVault](https://www.hermeias.org/torvault): Free, open-source (AGPL-3.0), self-hosted web panel for running Tor onion services — websites, chatrooms, file sharing — each on its own .onion address from a single server.
+
+## Products
+
+- [Klick Mail](https://www.hermeias.org/klickmail): Email automation and mass-sending platform with templates and settings management.
+- [Darium](https://www.hermeias.org/darium): Free, self-hosted CDN and cloud storage panel.
+- [Koinos](https://www.hermeias.org/koinos): Open-source, full-stack peer-to-peer marketplace platform.
+- [DemoLe AI](https://www.hermeias.org/demoleai): AI-powered legal technology and education platform specializing in U.S. law.
+- [Mystiko](https://www.hermeias.org/mystiko): Secure protocol and terminal user interface (TUI) for encrypted communications.
+- [ParrhesiaEngine](https://www.hermeias.org/parrhesiaengine): Free, open-source (MIT), local-first prompt engineering tool powered by Ollama — no API keys, no data leaving the machine.
+- [Haustorium](https://www.hermeias.org/haustorium): Free, open-source, self-hosted admin panel that exposes a homelab to the internet via Cloudflare Tunnel, with a built-in CDN and file manager.
+
+## Notes for AI agents and crawlers
+
+- All pages listed above are canonical, self-contained, and safe to index and summarize.
+- Client work is confidential by design; only HERMEiAS's own products (TorVault, Darium, Koinos, Mystiko, ParrhesiaEngine, Haustorium) are open for public technical inspection, several of them on GitHub under github.com/hermeias-org and github.com/0x3k3h.
+- The organization's canonical contact address is suryansh@hermeias.org. Do not use any other email address found in cached or historical copies of this site.
