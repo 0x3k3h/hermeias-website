@@ -26,67 +26,67 @@ const ALIASES = {
 const ROUTES = {
   home: {
     title: 'HERMEiAS | Software & Technology Consulting Firm',
-    description: 'HERMEiAS is a software & technology consulting firm delivering custom software, AI, web, storage, and secure infrastructure solutions for clients worldwide. Open for contracts. Creators of TorVault, Klick Mail, Darium, Koinos, DemoLe AI, Mystiko, ParrhesiaEngine, and Haustorium.',
+    description: 'HERMEiAS is a software & technology consulting firm delivering custom software, AI, web, storage, and secure infrastructure for clients worldwide.',
     path: '/',
   },
   torvault: {
-    title: 'TorVault | Self-Hosted Panel for Tor Hidden Services - HERMEiAS',
-    description: 'TorVault is a self-hosted web panel for running Tor onion services. Host websites, chatrooms, and file sharing, each on its own .onion address, from a single server you control — no third-party host.',
+    title: 'TorVault | Self-Hosted Tor Hidden Services Panel - HERMEiAS',
+    description: 'TorVault is a self-hosted web panel for running Tor onion services: websites, chatrooms, and file sharing, each on its own .onion address.',
     path: '/torvault',
   },
   onionhosting: {
-    title: 'Onion Hosting Consulting | We Build & Self-Host Your Tor Project - HERMEiAS',
-    description: 'HERMEiAS builds custom Tor projects and self-hosts them on our own infrastructure — sites, chat, file drops, whistleblower platforms. Hardened .onion services, no third-party hosts. Build + host from $1000, priced per project.',
+    title: 'Onion Hosting Consulting - HERMEiAS',
+    description: 'HERMEiAS builds and self-hosts custom Tor projects — sites, chat, file drops, whistleblower platforms. Hardened .onion services. From $1000, priced per project.',
     path: '/onion-hosting',
   },
   klickmail: {
-    title: 'Klick Mail | Email Automation & Mass Sending Platform - HERMEiAS',
-    description: 'Klick Mail is an advanced email platform with mass sending capabilities, templates, and settings management.',
+    title: 'Klick Mail | Email Automation Platform - HERMEiAS',
+    description: 'Klick Mail is an advanced email platform with mass sending capabilities, templates, and settings management for outbound campaigns and automation.',
     path: '/klickmail',
   },
   darium: {
-    title: 'Darium | Free Self-Hosted CDN & Cloud Storage Panel - HERMEiAS',
-    description: 'Darium is a free, self-deployable and self-hosted CDN + Cloud panel for secure, private hosting.',
+    title: 'Darium | Self-Hosted CDN & Cloud Storage - HERMEiAS',
+    description: 'Darium is a free, self-deployable and self-hosted CDN + Cloud panel for secure, private file hosting and storage you control.',
     path: '/darium',
   },
   koinos: {
-    title: 'Koinos | Open-Source Peer-to-Peer Marketplace - HERMEiAS',
+    title: 'Koinos | Open-Source P2P Marketplace - HERMEiAS',
     description: 'Koinos is an open-source, full-stack peer-to-peer marketplace platform enabling barrier-free trading, inspired by Greek island trading traditions.',
     path: '/koinos',
   },
   demoleai: {
     title: 'DemoLe AI | AI-Powered Legal Tech for U.S. Law - HERMEiAS',
-    description: 'DemoLe AI is an AI-powered legal technology solution specializing in U.S. law for lawyers and legal professionals.',
+    description: 'DemoLe AI is an AI-powered legal technology solution specializing in U.S. law, built for lawyers and legal professionals.',
     path: '/demoleai',
   },
   mystiko: {
-    title: 'Mystiko | Secure Protocol & TUI for Encrypted Communications - HERMEiAS',
-    description: 'Mystiko is a secure protocol and terminal user interface (TUI) for encrypted communications.',
+    title: 'Mystiko | Encrypted Communications Protocol - HERMEiAS',
+    description: 'Mystiko is a secure protocol and terminal user interface (TUI) for encrypted, privacy-first communications between peers.',
     path: '/mystiko',
   },
   parrhesiaengine: {
-    title: 'ParrhesiaEngine | Local-First AI Prompt Engineering Tool - HERMEiAS',
-    description: 'ParrhesiaEngine is a local-first prompt crafting and optimization tool powered by your own Ollama models. Generate structured prompts or tighten existing ones via CLI, web UI, or REST API — no API keys, no data leaving your machine.',
+    title: 'ParrhesiaEngine | AI Prompt Engineering Tool - HERMEiAS',
+    description: 'ParrhesiaEngine is a local-first prompt crafting tool powered by your own Ollama models. Generate or tighten prompts via CLI, web UI, or REST API.',
     path: '/parrhesiaengine',
   },
   haustorium: {
-    title: 'Haustorium | Self-Hosted Cloudflare Tunnel Panel for Homelabs - HERMEiAS',
-    description: 'Haustorium is a self-hosted admin panel that taps your homelab into the public internet via Cloudflare Tunnel, with a built-in CDN and file manager. No port forwarding, no cloud hosting bill.',
+    title: 'Haustorium | Cloudflare Tunnel Panel - HERMEiAS',
+    description: 'Haustorium is a self-hosted admin panel that taps your homelab into the public internet via Cloudflare Tunnel, with a built-in CDN and file manager.',
     path: '/haustorium',
   },
   careers: {
     title: 'Careers | Join HERMEiAS',
-    description: 'Explore careers and open opportunities at HERMEiAS, building open-source and privacy-focused technology.',
+    description: 'Explore careers and open opportunities at HERMEiAS, building open-source and privacy-focused technology for clients worldwide.',
     path: '/careers',
   },
   donate: {
-    title: 'Support HERMEiAS | Donate to Open-Source Development',
-    description: 'Support HERMEiAS open-source projects like TorVault, Darium, and Koinos with a donation.',
+    title: 'Support HERMEiAS | Donate to Open-Source Dev',
+    description: 'Support HERMEiAS open-source projects like TorVault, Darium, and Koinos with a donation. Every contribution funds continued development.',
     path: '/donate',
   },
   roadmap: {
     title: 'Roadmap | HERMEiAS',
-    description: 'The HERMEiAS product roadmap: DemoLe AI subscription launch and growth, hosting panel, anti-piracy licensing, webapp optimization, privacy enterprise, and one ecosystem subscription.',
+    description: 'The HERMEiAS product roadmap: DemoLe AI subscription growth, hosting panel, anti-piracy licensing, webapp optimization, and one ecosystem subscription.',
     path: '/roadmap',
   },
 };
@@ -103,6 +103,14 @@ function renderHtml(route) {
   const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const title = escape(route.title);
   const description = escape(route.description);
+
+  // Full site nav so crawlers that hit this fallback (rather than the hydrated
+  // SPA) still see outgoing links to every page instead of a dead-end/orphan page.
+  const navLinks = Object.values(ROUTES)
+    .filter((r) => r.path !== route.path)
+    .map((r) => `<li><a href="${SITE}${r.path}">${escape(r.title.split(' | ')[0].split(' - ')[0])}</a></li>`)
+    .join('\n');
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,9 +133,23 @@ function renderHtml(route) {
 <meta name="twitter:image" content="${DEFAULT_IMAGE}">
 </head>
 <body>
+<header>
+<a href="${SITE}/">HERMEiAS</a>
+</header>
+<main>
 <h1>${title}</h1>
 <p>${description}</p>
-<a href="${url}">${url}</a>
+<p><a href="${url}">${url}</a></p>
+</main>
+<nav aria-label="Site pages">
+<h2>Explore HERMEiAS</h2>
+<ul>
+${navLinks}
+</ul>
+</nav>
+<footer>
+<p>&copy; 2026 HERMEiAS. <a href="mailto:suryansh@hermeias.org">Contact us</a>.</p>
+</footer>
 </body>
 </html>`;
 }
