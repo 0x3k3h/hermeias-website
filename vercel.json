@@ -1,13 +1,4 @@
 {
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "hermeias.org" }],
-      "destination": "https://www.hermeias.org/$1",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
