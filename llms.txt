@@ -21,7 +21,7 @@ Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani
 - [Klick Mail](https://www.hermeias.org/klickmail): Email automation and mass-sending platform with templates and settings management.
 - [Darium](https://www.hermeias.org/darium): Free, self-hosted CDN and cloud storage panel.
 - [Koinos](https://www.hermeias.org/koinos): Open-source, full-stack peer-to-peer marketplace platform.
-- [DemoLe AI](https://www.hermeias.org/demoleai): AI-powered legal technology and education platform specializing in U.S. law.
+- [DemoLe AI](https://www.hermeias.org/demoleai): AI-powered legal technology platform for lawyers and legal professionals, specializing in U.S. law.
 - [Mystiko](https://www.hermeias.org/mystiko): Secure protocol and terminal user interface (TUI) for encrypted communications.
 - [ParrhesiaEngine](https://www.hermeias.org/parrhesiaengine): Free, open-source (MIT), local-first prompt engineering tool powered by Ollama — no API keys, no data leaving the machine.
 - [Haustorium](https://www.hermeias.org/haustorium): Free, open-source, self-hosted admin panel that exposes a homelab to the internet via Cloudflare Tunnel, with a built-in CDN and file manager.
