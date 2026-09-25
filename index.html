@@ -4600,7 +4600,6 @@
         };
 
         const App = () => {
-          const [loading, setLoading] = useState(true);
           const [menuOpen, setMenuOpen] = useState(false);
           const [productsMenuOpen, setProductsMenuOpen] = useState(false);
 
@@ -4844,12 +4843,6 @@
             return () => window.removeEventListener('keydown', handleEscape);
           }, [productsMenuOpen]);
 
-          // Loading Sequence
-          useEffect(() => {
-            const timer = setTimeout(() => setLoading(false), 2500);
-            return () => clearTimeout(timer);
-          }, []);
-
           // Smooth Scroll Anchor
           const scrollTo = (id) => {
             setMenuOpen(false);
@@ -4958,25 +4951,6 @@
           // Render Roadmap page
           if (currentPage === 'roadmap') {
             return <RoadmapPage onNavigate={navigateTo} />;
-          }
-
-          if (loading) {
-            return (
-              <div className="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 overflow-hidden">
-                <div className="w-64 relative">
-                  <div className="absolute top-0 left-0 h-1 bg-white animate-[width_2s_ease-in-out_forwards]" style={{ animationName: 'loadingBar' }} />
-                  <style>{`
-                    @keyframes loadingBar {
-                      0% { width: 0%; }
-                      100% { width: 100%; }
-                    }
-                  `}</style>
-                </div>
-                <div className="mt-8 font-mono text-xs text-white animate-pulse">
-                  INITIALIZING HERMEiAS PROTOCOL...
-                </div>
-              </div>
-            );
           }
 
           return (
