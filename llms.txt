@@ -1,6 +1,6 @@
 # HERMEiAS
 
-> HERMEiAS is a software & technology consulting firm building custom software, AI systems, web platforms, storage infrastructure, payment integrations, and secure/private communications systems for clients worldwide across hospitality, real estate, security, and legal sectors. HERMEiAS is also the creator of a portfolio of open-source and commercial products spanning Tor/onion hosting, email automation, self-hosted storage, peer-to-peer marketplaces, legal AI, encrypted communications, prompt engineering, and homelab tunneling.
+> HERMEiAS is a software & technology consulting firm building custom software, AI systems, web platforms, storage infrastructure, payment integrations, and secure/private communications systems for clients worldwide across hospitality, real estate, security, and legal sectors. HERMEiAS is also the creator of a portfolio of open-source and commercial products spanning Tor/onion hosting, Monero payment gateways, email automation, self-hosted storage, peer-to-peer marketplaces, legal AI, encrypted communications, prompt engineering, and homelab tunneling.
 
 Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani, CEO). Open for software & technology consulting contracts worldwide.
 
@@ -15,6 +15,10 @@ Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani
 
 - [.onion Hosting Consulting](https://www.hermeias.org/onion-hosting): HERMEiAS builds and self-hosts custom Tor projects (sites, chat, file drops, whistleblower platforms) on its own infrastructure — no third-party hosts. Priced per project, starting at $1000.
 - [TorVault](https://www.hermeias.org/torvault): Free, open-source (AGPL-3.0), self-hosted web panel for running Tor onion services — websites, chatrooms, file sharing — each on its own .onion address from a single server.
+
+## Payments
+
+- [NYX](https://www.hermeias.org/nyx): Self-hosted, non-custodial Monero (XMR) payment gateway for Tor (.onion) merchants and privacy-first businesses — accept XMR payments straight into your own wallet with no payment processor in between; per-order subaddresses, real-time payment monitoring, REST API, and webhooks. Proprietary licensed software (closed source, code not public): Lifetime license $500 one-time + 1% per transaction (support included), or Starter $200 one-time + 5% per transaction; Enterprise and White-Label custom. Full custody, zero counterparty risk.
 
 ## Products
 
