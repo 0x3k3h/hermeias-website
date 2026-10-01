@@ -1,4 +1,8 @@
 import { next } from '@vercel/functions';
+import './seo-content.js';
+
+// Product page content (H1 taglines, sections, FAQs, schema facts), shared with index.html
+const PRODUCT_SEO = globalThis.HERMEIAS_SEO || {};
 
 // Serve real per-route <title>/<meta>/OG tags to crawlers that don't execute
 // JavaScript (social link-unfurlers, and as a fast first pass for search bots).
@@ -21,6 +25,8 @@ const ALIASES = {
   'support': 'donate',
   'parrhesia-engine': 'parrhesiaengine',
   'parrhesia': 'parrhesiaengine',
+  'nyx-gateway': 'nyx',
+  'nyxgateway': 'nyx',
 };
 
 const ROUTES = {
@@ -30,8 +36,8 @@ const ROUTES = {
     path: '/',
   },
   torvault: {
-    title: 'TorVault | Self-Hosted Tor Hidden Services Panel - HERMEiAS',
-    description: 'TorVault is a self-hosted web panel for running Tor onion services: websites, chatrooms, and file sharing, each on its own .onion address.',
+    title: 'Self-Hosted Tor Hidden Service Panel | TorVault - HERMEiAS',
+    description: 'TorVault is a free, open-source, self-hosted panel for running Tor hidden services: host .onion websites, chatrooms and file drops from one server.',
     path: '/torvault',
   },
   onionhosting: {
@@ -40,39 +46,44 @@ const ROUTES = {
     path: '/onion-hosting',
   },
   klickmail: {
-    title: 'Klick Mail | Email Automation Platform - HERMEiAS',
-    description: 'Klick Mail is an advanced email platform with mass sending capabilities, templates, and settings management for outbound campaigns and automation.',
+    title: 'Free Bulk Email Client & Mass Mailer | Klick Mail - HERMEiAS',
+    description: 'Klick Mail is a free email client built for mass mailing. Send custom HTML emails to your contact lists over IMAP, SMTP or POP3 with TLS. No tracking.',
     path: '/klickmail',
   },
   darium: {
-    title: 'Darium | Self-Hosted CDN & Cloud Storage - HERMEiAS',
-    description: 'Darium is a free, self-deployable and self-hosted CDN + Cloud panel for secure, private file hosting and storage you control.',
+    title: 'Self-Hosted CDN & Cloud Storage Panel | Darium - HERMEiAS',
+    description: 'Darium is a free, self-hosted CDN and cloud storage panel: drag-and-drop uploads, a file explorer, smart caching, stats and storage limits on your server.',
     path: '/darium',
   },
   koinos: {
-    title: 'Koinos | Open-Source P2P Marketplace - HERMEiAS',
-    description: 'Koinos is an open-source, full-stack peer-to-peer marketplace platform enabling barrier-free trading, inspired by Greek island trading traditions.',
+    title: 'Open-Source P2P Marketplace Software | Koinos - HERMEiAS',
+    description: 'Koinos is an MIT-licensed, open-source peer-to-peer marketplace you can self-host: listings, messaging, transactions and payments, deployed with Docker.',
     path: '/koinos',
   },
   demoleai: {
-    title: 'DemoLe AI | AI-Powered Legal Tech for U.S. Law - HERMEiAS',
-    description: 'DemoLe AI is an AI-powered legal technology solution specializing in U.S. law, built for lawyers and legal professionals.',
+    title: 'AI Legal Research for U.S. Lawyers | DemoLe AI - HERMEiAS',
+    description: 'DemoLe AI is an AI legal research assistant for U.S. lawyers and law firms: case research, legal analysis and intelligence gathering. Live at Demole.app.',
     path: '/demoleai',
   },
   mystiko: {
-    title: 'Mystiko | Encrypted Communications Protocol - HERMEiAS',
-    description: 'Mystiko is a secure protocol and terminal user interface (TUI) for encrypted, privacy-first communications between peers.',
+    title: 'Encrypted Terminal Messenger (TUI) | Mystiko - HERMEiAS',
+    description: 'Mystiko is an encrypted messaging protocol for the terminal: end-to-end encryption, zero metadata and a decentralized peer-to-peer network. Coming soon.',
     path: '/mystiko',
   },
   parrhesiaengine: {
-    title: 'ParrhesiaEngine | AI Prompt Engineering Tool - HERMEiAS',
-    description: 'ParrhesiaEngine is a local-first prompt crafting tool powered by your own Ollama models. Generate or tighten prompts via CLI, web UI, or REST API.',
+    title: 'Ollama Prompt Generator | ParrhesiaEngine - HERMEiAS',
+    description: 'ParrhesiaEngine is a free, open-source prompt generator and optimizer that runs on your own Ollama models. CLI, web UI and REST API. No API keys needed.',
     path: '/parrhesiaengine',
   },
   haustorium: {
-    title: 'Haustorium | Cloudflare Tunnel Panel - HERMEiAS',
-    description: 'Haustorium is a self-hosted admin panel that taps your homelab into the public internet via Cloudflare Tunnel, with a built-in CDN and file manager.',
+    title: 'Homelab Hosting via Cloudflare Tunnel | Haustorium - HERMEiAS',
+    description: 'Haustorium is a self-hosted panel that serves websites and a personal CDN from your homelab via Cloudflare Tunnel. No port forwarding, no cloud hosting bill.',
     path: '/haustorium',
+  },
+  nyx: {
+    title: 'Self-Hosted Monero (XMR) Payment Gateway | NYX - HERMEiAS',
+    description: 'NYX is a self-hosted, non-custodial Monero (XMR) payment gateway for Tor and privacy-first merchants. Accept XMR into your own wallet. From $200.',
+    path: '/nyx',
   },
   careers: {
     title: 'Careers | Join HERMEiAS',
@@ -93,9 +104,8 @@ const ROUTES = {
 
 function resolveRoute(pathname) {
   const slug = pathname.toLowerCase().replace(/^\/|\/$/g, '');
-  if (slug === '') return ROUTES.home;
-  const key = ALIASES[slug] || slug;
-  return ROUTES[key] || null;
+  const key = slug === '' ? 'home' : (ALIASES[slug] || slug);
+  return ROUTES[key] ? { ...ROUTES[key], key } : null;
 }
 
 function renderHtml(route) {
@@ -103,12 +113,59 @@ function renderHtml(route) {
   const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const title = escape(route.title);
   const description = escape(route.description);
+  const seo = PRODUCT_SEO[route.key];
+  const h1 = escape(seo ? `${seo.name}: ${seo.tagline}` : route.title);
+
+  // Full page content for product routes, mirroring what the React page shows people
+  const sections = ((seo && seo.sections) || []).map((sec) => {
+    const heading = sec.heading ? `<h2>${escape(sec.heading)}</h2>` : '';
+    const paragraphs = (sec.paragraphs || []).map((t) => `<p>${escape(t)}</p>`).join('');
+    const tag = sec.ordered ? 'ol' : 'ul';
+    const items = sec.items ? `<${tag}>${sec.items.map((t) => `<li>${escape(t)}</li>`).join('')}</${tag}>` : '';
+    return `<section>${heading}${paragraphs}${items}</section>`;
+  }).join('\n');
+
+  const faq = seo && seo.faq
+    ? `<section><h2>Frequently asked questions</h2>${seo.faq.map((f) => `<h3>${escape(f.q)}</h3><p>${escape(f.a)}</p>`).join('')}</section>`
+    : '';
+
+  const links = ((seo && seo.links) || []).map((l) => `<p><a href="${escape(l.href)}">${escape(l.label)}</a></p>`).join('\n');
+
+  const app = (seo && seo.app) || {};
+  const schema = seo ? [
+    {
+      '@type': 'SoftwareApplication',
+      name: seo.name,
+      description: route.description,
+      applicationCategory: app.applicationCategory,
+      operatingSystem: app.operatingSystem,
+      url: app.appUrl || url,
+      ...(app.codeRepository ? { codeRepository: app.codeRepository } : {}),
+      ...(app.license ? { license: app.license } : {}),
+      ...(app.offers ? { offers: app.offers } : app.free ? { offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } } : {}),
+      creator: { '@type': 'Organization', name: 'HERMEiAS', url: SITE },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: seo.name, item: url },
+      ],
+    },
+    ...(seo.faq ? [{
+      '@type': 'FAQPage',
+      mainEntity: seo.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    }] : []),
+  ] : [];
+  const jsonLd = schema.length
+    ? `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': schema }).replace(/</g, '\\u003c')}</script>`
+    : '';
 
   // Full site nav so crawlers that hit this fallback (rather than the hydrated
   // SPA) still see outgoing links to every page instead of a dead-end/orphan page.
-  const navLinks = Object.values(ROUTES)
-    .filter((r) => r.path !== route.path)
-    .map((r) => `<li><a href="${SITE}${r.path}">${escape(r.title.split(' | ')[0].split(' - ')[0])}</a></li>`)
+  const navLinks = Object.entries(ROUTES)
+    .filter(([, r]) => r.path !== route.path)
+    .map(([key, r]) => `<li><a href="${SITE}${r.path}">${escape(PRODUCT_SEO[key] ? PRODUCT_SEO[key].name : r.title.split(' | ')[0].split(' - ')[0])}</a></li>`)
     .join('\n');
 
   return `<!DOCTYPE html>
@@ -131,14 +188,18 @@ function renderHtml(route) {
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${description}">
 <meta name="twitter:image" content="${DEFAULT_IMAGE}">
+${jsonLd}
 </head>
 <body>
 <header>
 <a href="${SITE}/">HERMEiAS</a>
 </header>
 <main>
-<h1>${title}</h1>
+<h1>${h1}</h1>
 <p>${description}</p>
+${sections}
+${faq}
+${links}
 <p><a href="${url}">${url}</a></p>
 </main>
 <nav aria-label="Site pages">
