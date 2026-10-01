@@ -4,6 +4,10 @@
 
 Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani, CEO). Open for software & technology consulting contracts worldwide.
 
+## Flagship Product
+
+- [NYX](https://www.hermeias.org/nyx): The HERMEiAS flagship product. Self-hosted, non-custodial Monero (XMR) payment gateway for Tor (.onion) merchants and privacy-first businesses — accept XMR payments straight into your own wallet with no payment processor in between; per-order subaddresses, real-time payment monitoring, REST API, and webhooks. Proprietary licensed software (closed source, code not public): Lifetime license $500 one-time + 1% per transaction (support included), or Starter $200 one-time + 5% per transaction; Enterprise and White-Label custom. Full custody, zero counterparty risk.
+
 ## Company
 
 - [Home](https://www.hermeias.org/): Overview of HERMEiAS as a consulting firm — services, team, selected clients, and FAQ.
@@ -15,10 +19,6 @@ Contact: suryansh@hermeias.org — direct line to the Founder (Suryansh Nandwani
 
 - [.onion Hosting Consulting](https://www.hermeias.org/onion-hosting): HERMEiAS builds and self-hosts custom Tor projects (sites, chat, file drops, whistleblower platforms) on its own infrastructure — no third-party hosts. Priced per project, starting at $1000.
 - [TorVault](https://www.hermeias.org/torvault): Free, open-source (AGPL-3.0), self-hosted web panel for running Tor onion services — websites, chatrooms, file sharing — each on its own .onion address from a single server.
-
-## Payments
-
-- [NYX](https://www.hermeias.org/nyx): Self-hosted, non-custodial Monero (XMR) payment gateway for Tor (.onion) merchants and privacy-first businesses — accept XMR payments straight into your own wallet with no payment processor in between; per-order subaddresses, real-time payment monitoring, REST API, and webhooks. Proprietary licensed software (closed source, code not public): Lifetime license $500 one-time + 1% per transaction (support included), or Starter $200 one-time + 5% per transaction; Enterprise and White-Label custom. Full custody, zero counterparty risk.
 
 ## Products
 

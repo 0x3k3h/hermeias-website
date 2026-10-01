@@ -23,7 +23,7 @@ globalThis.HERMEIAS_SEO = {
     sections: [
       {
         paragraphs: [
-          "Accept Monero payments straight into your own wallet, on a Tor .onion store or a clearnet shop, with no payment processor in between. A non-custodial XMR gateway for privacy-first merchants. Full custody. Zero counterparty risk.",
+          "Accept Monero payments straight into your own wallet, on a Tor .onion store or a clearnet shop, with no payment processor in between. A non-custodial XMR gateway for privacy-first merchants, and the HERMEiAS flagship product. Full custody. Zero counterparty risk.",
           "Payments in the dark.",
         ],
       },
@@ -337,10 +337,10 @@ globalThis.HERMEIAS_SEO = {
     links: [{ label: "Try DemoLe AI at Demole.app", href: "https://demole.app" }],
     sections: [
       {
-        paragraphs: ["An AI built for the legal industry for intelligence gathering. The HERMEiAS flagship product for legal research and case analysis."],
+        paragraphs: ["An AI built for the legal industry for intelligence gathering. Built for legal research and case analysis."],
       },
       {
-        heading: "The flagship",
+        heading: "The platform",
         items: [
           "Legal intelligence: specialized AI built for the legal industry, designed for intelligence gathering, case research and legal analysis.",
           "Case research: find relevant cases, precedents and legal insights faster with AI-powered analysis.",
@@ -360,7 +360,7 @@ globalThis.HERMEIAS_SEO = {
       },
     ],
     faq: [
-      { q: "What is DemoLe AI?", a: "DemoLe AI is an AI built for the legal industry that specializes in U.S. law. It helps with case research, legal analysis and intelligence gathering, and it is the flagship HERMEiAS product." },
+      { q: "What is DemoLe AI?", a: "DemoLe AI is an AI built for the legal industry that specializes in U.S. law. It helps with case research, legal analysis and intelligence gathering." },
       { q: "Who is DemoLe AI for?", a: "Lawyers, legal professionals and law firms working with U.S. law." },
       { q: "Is DemoLe AI available now?", a: "Yes. DemoLe AI launched in April 2026 and is live at Demole.app." },
       { q: "Is my case data kept private?", a: "DemoLe AI is built with privacy at its core. Your legal research and case data remain confidential and secure, following HERMEiAS privacy principles." },
